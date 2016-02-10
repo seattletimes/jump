@@ -41,6 +41,11 @@ select, input {
   border: 1px solid #CCC;
 }
 
+[disabled] {
+  background: #EEE;
+  color: #888;
+}
+
 button {
   display: block;
   margin: 16px 0;
@@ -81,6 +86,17 @@ var path = document.querySelector(".path");
 var go = document.querySelector(".go");
 
 year.value = (new Date()).getFullYear();
+
+var disableYear = function() {
+  if (domain.value.match(/staging/)) {
+    year.setAttribute("disabled", "");
+  } else {
+    year.removeAttribute("disabled");
+  }
+};
+
+disableYear();
+domain.addEventListener("change", disableYear);
 
 go.addEventListener("click", function() {
   var a = [domain.value];
