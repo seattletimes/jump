@@ -82,7 +82,7 @@ var go = document.querySelector(".go");
 
 year.value = (new Date()).getFullYear();
 
-go.addEventListener("click", function() {
+var openPage = function() {
   var a = [domain.value];
   if (domain.value.match(/projects\./)) {
     a.push(year.value);
@@ -90,7 +90,17 @@ go.addEventListener("click", function() {
   a.push(path.value.replace(/^\//, ""));
   var url = a.join("/");
   window.open(url);
-});
+};
+
+go.addEventListener("click", openPage);
+
+var onKey = function(e) {
+  if (e.keyCode == 13) {
+    openPage();
+  }
+};
+
+[domain, year, path].forEach(el => el.addEventListener("keyup", onKey));
 
     </script>
 
